@@ -83,11 +83,12 @@ def printsubs_srt(subs):
     Print subtitle structure in srt format"""
     n = 1
     for i in subs:
-        print n
-        print deconvtime_srt(mstostime(i[0][0])), "-->",\
-              deconvtime_srt(mstostime(i[0][1]))
-        print i[1]
-        n += 1
+        if (int(i[0][0]) >= 0 and int(i[0][1]) >= 0):
+            print n
+            print deconvtime_srt(mstostime(i[0][0])), "-->",\
+                  deconvtime_srt(mstostime(i[0][1]))
+            print i[1]
+            n += 1
 
 
 # MicroDVD (sub) format functions
@@ -135,9 +136,10 @@ def printsubs_sub(subs, fps):
     Print subtitle structure in sub format"""
     print "{0}{1}%f" % (fps)
     for i in subs:
-        print "{%d}{%d}%s" % (stimetofps(mstostime(i[0][0]), fps),
-                stimetofps(mstostime(i[0][1]), fps),
-                "".join(i[1:]).replace("\n", "|")[:-1])
+        if (int(i[0][0]) >= 0 and int(i[0][1]) >= 0):
+            print "{%d}{%d}%s" % (stimetofps(mstostime(i[0][0]), fps),
+                    stimetofps(mstostime(i[0][1]), fps),
+                    "".join(i[1:]).replace("\n", "|")[:-1])
 
 
 # Common functions
